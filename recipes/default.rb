@@ -35,3 +35,16 @@ user node['aapp']['user']
     recursive true
   end
 end
+
+# Fix the hard-codes space-track tle source
+replace_or_add "space-track-tle" do
+  path "/opt/aapp/ATOVS_ENV7"
+  pattern "^PAR_NAVIGATION_TLE_URL_DOWNLOAD='https://www.space-track.org'"
+  line "# PAR_NAVIGATION_TLE_URL_DOWNLOAD='https://www.space-track.org'"
+end
+
+replace_or_add "celestrack-tle" do
+  path "/opt/aapp/ATOVS_ENV7"
+  pattern "^#PAR_NAVIGATION_TLE_URL_DOWNLOAD='http://ftp.celestrak.com/NORAD/elements/weather.txt'"
+  line "PAR_NAVIGATION_TLE_URL_DOWNLOAD='http://ftp.celestrak.com/NORAD/elements/weather.txt'"
+end

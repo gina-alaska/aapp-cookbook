@@ -7,3 +7,4 @@ long_description 'Installs/Configures aapp'
 version '0.1.0'
 
 depends 'yum-gina'
+depends 'line'
