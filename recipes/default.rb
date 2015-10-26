@@ -3,13 +3,19 @@
 # Recipe:: default
 #
 # Copyright (c) 2015 The Authors, All Rights Reserved.
-include_recipe "yum-gina"
 
-%w(ksh libgfortran perl perl-XML-LibXML aapp).each do |pkg|
+%w(ksh libgfortran perl perl-XML-LibXML).each do |pkg|
   package pkg do
     action :install
   end
 end
+
+remote_file "#{Chef::Config[:file_cache_path]}/aapp-7.10-1.x86_64.rpm" do 
+  source "https://s3-us-west-2.amazonaws.com/gina-packages/aapp-7.10-1.x86_64.rpm"
+end
+
+rpm_package "#{Chef::Config[:file_cache_path]}/aapp-7.10-1.x86_64.rpm"
+
 
 cookbook_file '/etc/profile.d/aapp_env.sh' do
   source "aapp_env.sh"
